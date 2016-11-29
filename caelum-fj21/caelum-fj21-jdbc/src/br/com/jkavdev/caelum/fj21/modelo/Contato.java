@@ -1,5 +1,6 @@
 package br.com.jkavdev.caelum.fj21.modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Contato {
@@ -48,6 +49,22 @@ public class Contato {
 
 	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("id = ").append(id)
+			.append(", nome = ").append(nome)
+			.append(", email = ").append(email)
+			.append(", endereco = ").append(endereco);
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+		builder.append(", data de nascimento = ")
+		.append(dateFormat.format(dataNascimento.getTime()));
+		
+		return builder.toString();
 	}
 
 }

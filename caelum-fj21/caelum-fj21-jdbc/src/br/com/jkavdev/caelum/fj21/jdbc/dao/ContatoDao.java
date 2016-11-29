@@ -33,7 +33,7 @@ public class ContatoDao {
 			preparedStatement.execute();
 			preparedStatement.close();
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new DaoException(e);
 		}
 	}
 
@@ -61,7 +61,70 @@ public class ContatoDao {
 
 			return contatos;
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new DaoException(e);
+		}
+	}
+
+	public List<Contato> pesquisarPorNome(String nome) {
+		String selectPorNome = "select * from Contatos where nome like ?";
+
+		try {
+			List<Contato> contatos = new ArrayList<>();
+
+			PreparedStatement preparedStatement = this.connection.prepareStatement(selectPorNome);
+			preparedStatement.setString(1, nome + "%");
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Contato contato = new Contato();
+				contato.setNome(resultSet.getString("nome"));
+				contato.setEmail(resultSet.getString("email"));
+				contato.setEndereco(resultSet.getString("endereco"));
+
+				Calendar data = Calendar.getInstance();
+				data.setTime(resultSet.getDate("dataNascimento"));
+				contato.setDataNascimento(data);
+
+				contatos.add(contato);
+			}
+
+			resultSet.close();
+			preparedStatement.close();
+
+			return contatos;
+		} catch (Exception e) {
+			throw new DaoException(e);
+		}
+	}
+
+	public Contato pesquisar(Long id) {
+		Contato contato = new Contato();
+		String selectPorId = "select * from Contatos where id = ?";
+
+		try {
+			PreparedStatement preparedStatement = this.connection.prepareStatement(selectPorId);
+			preparedStatement.setLong(1, id);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+
+				contato.setNome(resultSet.getString("nome"));
+				contato.setEmail(resultSet.getString("email"));
+				contato.setEndereco(resultSet.getString("endereco"));
+
+				Calendar data = Calendar.getInstance();
+				data.setTime(resultSet.getDate("dataNascimento"));
+				contato.setDataNascimento(data);
+			}
+
+			resultSet.close();
+			preparedStatement.close();
+
+			return contato;
+		} catch (Exception e) {
+			throw new DaoException(e);
 		}
 	}
 
