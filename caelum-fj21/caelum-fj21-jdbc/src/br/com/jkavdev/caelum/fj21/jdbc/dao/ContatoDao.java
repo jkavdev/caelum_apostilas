@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -125,6 +126,35 @@ public class ContatoDao {
 			return contato;
 		} catch (Exception e) {
 			throw new DaoException(e);
+		}
+	}
+
+	public void altera(Contato contato) {
+		String alteraContato = "update contatos set nome=?, email=?, endereco=?," + "dataNascimento=? where id=?";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(alteraContato);
+			stmt.setString(1, contato.getNome());
+			stmt.setString(2, contato.getEmail());
+			stmt.setString(3, contato.getEndereco());
+			stmt.setDate(4, new Date(contato.getDataNascimento().getTimeInMillis()));
+			stmt.setLong(5, contato.getId());
+			
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void remove(Contato contato) {
+		try {
+			PreparedStatement stmt = connection.prepareStatement("delete from contatos where id=?");
+			stmt.setLong(1, contato.getId());
+			
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
