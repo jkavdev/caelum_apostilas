@@ -7,7 +7,7 @@
 	<display-name>caelum-fj21-agenda</display-name>
 	
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>bem-vindo.jsp</welcome-file>
 	</welcome-file-list>
 	
 	<error-page>
