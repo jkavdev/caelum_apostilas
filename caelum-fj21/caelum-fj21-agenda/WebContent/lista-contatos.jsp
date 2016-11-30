@@ -2,12 +2,15 @@
 <%@page import="java.util.List"%>
 <%@page import="br.com.jkavdev.caelum.fj21.dao.ContatoDao"%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html>
 <body>
-	<jsp:useBean id="dao" class="br.com.jkavdev.caelum.fj21.dao.ContatoDao"/>
-	
+
+	<c:import url="cabecalho.jsp" />
+
+	<jsp:useBean id="dao" class="br.com.jkavdev.caelum.fj21.dao.ContatoDao" />
+
 	<table border="1">
 		<tr>
 			<td>Nome</td>
@@ -15,25 +18,26 @@
 			<td>Endereço</td>
 			<td>Data de Nascimento</td>
 		</tr>
-	
+
 		<c:forEach var="contato" items="${dao.contatos}" varStatus="id">
 			<tr bgcolor="#${id.count % 2 == 0 ? 'aaee88' : 'ffffff' }">
 				<td>${contato.nome}</td>
-				<td>
-					<c:choose>
+				<td><c:choose>
 						<c:when test="${not empty contato.email}">
 							<a href="mailto:${contato.email}">${contato.email}</a>
 						</c:when>
 						<c:otherwise>
-							E-mail não informado
-						</c:otherwise>
-					</c:choose>
-				</td>
+						E-mail não informado
+					</c:otherwise>
+					</c:choose></td>
 				<td>${contato.endereco}</td>
 				<td>${contato.dataNascimento}</td>
 			</tr>
 		</c:forEach>
-		
+
 	</table>
+
+	<c:import url="rodape.jsp" />
+
 </body>
 </html>
