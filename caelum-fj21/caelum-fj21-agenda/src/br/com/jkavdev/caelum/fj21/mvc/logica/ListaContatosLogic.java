@@ -1,26 +1,23 @@
 package br.com.jkavdev.caelum.fj21.mvc.logica;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.jkavdev.caelum.fj21.dao.ContatoDao;
 import br.com.jkavdev.caelum.fj21.modelo.Contato;
 
-public class RemoveContatoLogic implements Logica {
+public class ListaContatosLogic implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		long id = Long.parseLong(request.getParameter("id"));
-
-		Contato contato = new Contato();
-		contato.setId(id);
-
 		ContatoDao contatoDao = new ContatoDao();
-		contatoDao.remove(contato);
+		List<Contato> contatos = contatoDao.getContatos();
 
-		System.out.println("Excluindo contato ....");
+		request.setAttribute("contatos", contatos);
 
-		return "mvc?logica=ListaContatosLogic";
+		return "lista-contatos.jsp";
 	}
 
 }

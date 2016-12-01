@@ -10,8 +10,6 @@
 
 	<c:import url="cabecalho.jsp" />
 
-	<jsp:useBean id="dao" class="br.com.jkavdev.caelum.fj21.dao.ContatoDao" />
-
 	<table border="1">
 		<tr>
 			<td>ID</td>
@@ -22,7 +20,7 @@
 			<td>Ações</td>
 		</tr>
 
-		<c:forEach var="contato" items="${dao.contatos}" varStatus="id">
+		<c:forEach var="contato" items="${contatos}" varStatus="id">
 			<tr bgcolor="#${id.count % 2 == 0 ? 'aaee88' : 'ffffff' }">
 				<td>${contato.id}</td>
 				<td>${contato.nome}</td>
