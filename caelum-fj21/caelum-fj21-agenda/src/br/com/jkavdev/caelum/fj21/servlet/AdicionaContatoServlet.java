@@ -48,11 +48,7 @@ public class AdicionaContatoServlet extends HttpServlet {
 
 		ContatoDao dao = new ContatoDao();
 		dao.adiciona(contato);
-
-		out.println("<html>");
-		out.println("<body>");
-		out.println("Contato " + contato.getNome() + " adicionado com sucesso");
-		out.println("</body>");
-		out.println("</html>");
+		
+		req.getRequestDispatcher("/contato-adicionado.jsp").forward(req,resp);
 	}
 }
