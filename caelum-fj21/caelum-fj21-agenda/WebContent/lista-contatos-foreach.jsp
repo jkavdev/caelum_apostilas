@@ -14,14 +14,17 @@
 
 	<table border="1">
 		<tr>
+			<td>ID</td>
 			<td>Nome</td>
-			<td>Email</td>
+			<td>Email</td> 
 			<td>Endereço</td>
 			<td>Data de Nascimento</td>
+			<td>Ações</td>
 		</tr>
 
 		<c:forEach var="contato" items="${dao.contatos}" varStatus="id">
 			<tr bgcolor="#${id.count % 2 == 0 ? 'aaee88' : 'ffffff' }">
+				<td>${contato.id}</td>
 				<td>${contato.nome}</td>
 				<td><c:choose>
 						<c:when test="${not empty contato.email}">
@@ -33,6 +36,7 @@
 					</c:choose></td>
 				<td>${contato.endereco}</td>
 				<td><fmt:formatDate value="${contato.dataNascimento.time}" pattern="dd/MM/yyyy"/></td>
+				<td><a href="mvc?logica=RemoveContatoLogic&id=${contato.id}">remover</a></td>
 			</tr>
 		</c:forEach>
 

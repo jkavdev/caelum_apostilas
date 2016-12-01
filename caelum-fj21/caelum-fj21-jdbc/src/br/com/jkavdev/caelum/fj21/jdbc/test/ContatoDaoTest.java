@@ -24,7 +24,7 @@ public class ContatoDaoTest {
 //
 //		System.out.println("Contatos adicionados!");
 //
-//		contatoDao.getContatos().forEach(e -> System.out.println(e));
+		contatoDao.getContatos().forEach(e -> System.out.println(e));
 //
 //		System.out.println("\n");
 //		contatoDao.pesquisarPorNome("jhonatan").forEach(e -> System.out.println(e));
@@ -32,7 +32,7 @@ public class ContatoDaoTest {
 //		System.out.println("\n");
 //		System.out.println(contatoDao.pesquisar(1L));
 		
-		contatoDao.remove(maria);
+//		contatoDao.remove(maria);
 	}
 
 	public static Contato criaContato(String nome, String email, String endereco) {
