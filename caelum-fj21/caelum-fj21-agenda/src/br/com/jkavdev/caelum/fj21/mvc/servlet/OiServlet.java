@@ -1,4 +1,4 @@
-package br.com.jkavdev.caelum.fj21.servlet;
+package br.com.jkavdev.caelum.fj21.mvc.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;

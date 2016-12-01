@@ -1,29 +1,24 @@
-package br.com.jkavdev.caelum.fj21.servlet;
+package br.com.jkavdev.caelum.fj21.mvc.logica;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.jkavdev.caelum.fj21.dao.ContatoDao;
 import br.com.jkavdev.caelum.fj21.modelo.Contato;
 
-@WebServlet("/adicionaContato")
-public class AdicionaContatoServlet extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
+public class SalvaContatoLogic implements Logica {
 
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		PrintWriter out = resp.getWriter();
+	public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		long id = 0;
+
+		if (req.getParameterMap().containsKey("id") && !req.getParameter("id").isEmpty())
+			id = Long.parseLong(req.getParameter("id"));
 
 		String nome = req.getParameter("nome");
 		String endereco = req.getParameter("endereco");
@@ -36,19 +31,23 @@ public class AdicionaContatoServlet extends HttpServlet {
 			dataNascimento = Calendar.getInstance();
 			dataNascimento.setTime(date);
 		} catch (ParseException e) {
-			out.println("Erro de conversão da data");
-			return; // para a execução do método
+			return "mvc?logica=ListaContatosLogic";
 		}
 
 		Contato contato = new Contato();
+		contato.setId(id);
 		contato.setNome(nome);
 		contato.setEndereco(endereco);
 		contato.setEmail(email);
 		contato.setDataNascimento(dataNascimento);
 
 		ContatoDao dao = new ContatoDao();
-		dao.adiciona(contato);
+		if (contato.getId() == 0)
+			dao.adiciona(contato);
+		else
+			dao.altera(contato);
 
-		req.getRequestDispatcher("/WEB-INF/views/contato-adicionado.jsp").forward(req, resp);
+		return "mvc?logica=ListaContatosLogic";
 	}
+
 }

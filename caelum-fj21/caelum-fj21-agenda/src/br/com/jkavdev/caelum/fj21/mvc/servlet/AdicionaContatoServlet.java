@@ -1,4 +1,4 @@
-package br.com.jkavdev.caelum.fj21.servlet;
+package br.com.jkavdev.caelum.fj21.mvc.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,7 +48,7 @@ public class AdicionaContatoServlet extends HttpServlet {
 
 		ContatoDao dao = new ContatoDao();
 		dao.adiciona(contato);
-
-		req.getRequestDispatcher("/WEB-INF/views/contato-adicionado.jsp").forward(req, resp);
+		
+		req.getRequestDispatcher("/WEB-INF/views/contato-adicionado.jsp").forward(req,resp);
 	}
 }
