@@ -1,7 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <head>
-	<link href="js/jquery-ui.min.css" rel="stylesheet" />
+	<link href="css/jquery-ui.min.css" rel="stylesheet" />
+	<link href="css/displaytag.css" rel="stylesheet" />
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 </head>
