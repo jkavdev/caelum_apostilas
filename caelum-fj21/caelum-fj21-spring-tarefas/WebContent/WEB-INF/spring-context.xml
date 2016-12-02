@@ -18,5 +18,7 @@
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="/WEB-INF/mensagens"></property>
 	</bean>
+	
+	<mvc:resources mapping="/resources/**" location="/resources/"/>
 
 </beans>

@@ -1,6 +1,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="caelum" %>
 
 <html>
+
+<head>
+	<link href="resources/css/jquery-ui.min.css" rel="stylesheet" />
+	<script src="resources/js/jquery-3.1.1.min.js"></script>
+	<script src="resources/js/jquery-ui.min.js"></script>
+</head>
+
 <body>
 	<h3>Alterar tarefa - ${tarefa.id}</h3>
 	
@@ -14,8 +22,8 @@
 		
 		<br /> 
 		
-		Data de finalização: <br /> <input type="text" name="dataFinalizacao" 
-			value="<fmt:formatDate value="${tarefa.dataFinalizacao.time}" pattern="dd/MM/yyyy" />" />
+		Data de finalização: <br />
+		<caelum:campo-data id="dataFinalizacao" value="${tarefa.dataFinalizacao.time}" /><br />
 		
 		<br /> 
 		
