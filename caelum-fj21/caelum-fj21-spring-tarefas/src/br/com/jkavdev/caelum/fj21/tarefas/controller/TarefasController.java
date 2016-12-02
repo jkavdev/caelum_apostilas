@@ -11,9 +11,9 @@ import br.com.jkavdev.caelum.fj21.tarefas.model.Tarefa;
 @Controller
 public class TarefasController {
 	
-	@RequestMapping("formularioTarefa")
+	@RequestMapping("novaTarefa")
 	public String form() {
-		return "formulario";
+		return "tarefa/formulario";
 	}
 
 	@RequestMapping("adicionaTarefa")
@@ -24,7 +24,7 @@ public class TarefasController {
 		TarefasDao tarefasDao = new TarefasDao();
 		tarefasDao.adiciona(tarefa);
 
-		return "tarefa-adicionada";
+		return "tarefa/adicionada";
 	}
 
 }
