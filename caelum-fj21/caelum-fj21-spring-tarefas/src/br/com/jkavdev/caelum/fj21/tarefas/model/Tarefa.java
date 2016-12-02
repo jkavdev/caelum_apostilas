@@ -21,8 +21,8 @@ public class Tarefa {
 		this.id = id;
 	}
 
-	@NotBlank
-	@Size(min = 5)
+	@NotBlank(message = "{tarefa.descricao.vazia}")
+	@Size(min = 5, message = "{tarefa.descricao.pequena}")
 	public String getDescricao() {
 		return descricao;
 	}

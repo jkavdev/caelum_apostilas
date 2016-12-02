@@ -1,5 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <html>
 	<body>
-		Nova tarefa adicionada com sucesso!
+		<fmt:message key="tarefa.adicionada.com.sucesso"/>
 	</body>
 </html>
