@@ -1,5 +1,6 @@
 package br.com.jkavdev.caelum.fj21.mvc.logica;
 
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,11 +43,12 @@ public class SalvaContatoLogic implements Logica {
 		contato.setEmail(email);
 		contato.setDataNascimento(dataNascimento);
 
-		ContatoDao dao = new ContatoDao();
+		Connection connection = (Connection) req.getAttribute("conexao");
+		ContatoDao contatoDao = new ContatoDao(connection);
 		if (contato.getId() == null || contato.getId() == 0) {
-			dao.adiciona(contato);
+			contatoDao.adiciona(contato);
 		} else {
-			dao.altera(contato);
+			contatoDao.altera(contato);
 		}
 
 		return "mvc?logica=ListaContatosLogic";
