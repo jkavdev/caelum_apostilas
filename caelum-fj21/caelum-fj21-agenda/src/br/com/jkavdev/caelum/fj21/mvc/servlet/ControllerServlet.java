@@ -26,7 +26,6 @@ public class ControllerServlet extends HttpServlet {
 			Logica logica = (Logica) classe.newInstance();
 			String pagina = logica.executa(req, resp);
 
-			resp.sendRedirect(pagina);
 			req.getRequestDispatcher(pagina).forward(req, resp);			
 		} catch (Exception e) {
 			throw new ServletException("Lógica de negócio causou uma exceção: " + e.getMessage(), e);

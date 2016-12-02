@@ -111,7 +111,7 @@ public class ContatoDao {
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			if (resultSet.next()) {
-
+				contato.setId(resultSet.getLong("id"));
 				contato.setNome(resultSet.getString("nome"));
 				contato.setEmail(resultSet.getString("email"));
 				contato.setEndereco(resultSet.getString("endereco"));

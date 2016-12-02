@@ -11,7 +11,7 @@ public class ListaContatosLogic implements Logica {
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setAttribute("contatos", new ContatoDao().getContatos());
 
-		return "/WEB-INF/views/lista-contatos-foreach.jsp";
+		return "/WEB-INF/views/lista-contatos.jsp";
 	}
 
 }

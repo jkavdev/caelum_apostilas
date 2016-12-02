@@ -4,22 +4,45 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 
 <html>
 <body>
 
 	<c:import url="cabecalho.jsp" />
 
-	<jsp:useBean id="dao" class="br.com.jkavdev.caelum.fj21.dao.ContatoDao" />
+	<table border="1">
+		<tr>
+			<td>ID</td>
+			<td>Nome</td>
+			<td>Email</td> 
+			<td>Endereço</td>
+			<td>Data de Nascimento</td>
+			<td>Ações</td>
+		</tr>
 
-	<display:table name="${dao.contatos}">
-	  <display:column property="id" title="ID" />
-	  <display:column property="nome" title="Nome" sortable="true"/>
-	  <display:column property="email" title="E-mail" href="mailto:email"/>
-	  <display:column property="endereco" title="Endereço" />
-	  <display:column property="dataNascimento.time" title="Data de nascimento" format="{0,date,dd-MM-yyyy}"/>
-	</display:table>
+		<c:forEach var="contato" items="${contatos}" varStatus="id">
+			<tr bgcolor="#${id.count % 2 == 0 ? 'aaee88' : 'ffffff' }">
+				<td>${contato.id}</td>
+				<td>${contato.nome}</td>
+				<td><c:choose>
+						<c:when test="${not empty contato.email}">
+							<a href="mailto:${contato.email}">${contato.email}</a>
+						</c:when>
+						<c:otherwise>
+						E-mail não informado
+					</c:otherwise>
+					</c:choose></td>
+				<td>${contato.endereco}</td>
+				<td><fmt:formatDate value="${contato.dataNascimento.time}" pattern="dd/MM/yyyy"/></td>
+				<td>
+					<a href="mvc?logica=RemoveContatoLogic&id=${contato.id}">remover</a>
+					<a href="mvc?logica=FormSalvaContatoLogic&id=${contato.id}" style="margin-left: 5px;">alterar</a>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+	
+	<a href="mvc?logica=AdicionarContatoLogic">Adicionar um contato</a>
 
 	<c:import url="rodape.jsp" />
 

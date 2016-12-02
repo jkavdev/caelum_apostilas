@@ -9,11 +9,13 @@
 	<h1>Adiciona Contatos</h1>
 	<hr />
 	
-	<form action="adicionaContato" method="post">
-		Nome: <input type="text" name="nome" /><br /> 
-		E-mail: <input type="text" name="email" /><br /> 
-		Endereço: <input type="text" name="endereco" /><br /> 
-		Data Nascimento: <caelum:campo-data id="dataNascimento" /><br /> 
+	<form action="mvc?logica=SalvaContatoLogic" method="post">
+		<input type="hidden" name="id" value="${contato.id}">
+		
+		Nome: <input type="text" name="nome" value="${contato.nome}"/><br /> 
+		E-mail: <input type="text" name="email" value="${contato.email}"/><br /> 
+		Endereço: <input type="text" name="endereco" value="${contato.endereco}"/><br /> 
+		Data Nascimento: <caelum:campo-data id="dataNascimento" value="${contato.dataNascimento.time}"/><br /> 
 		
 		<input type="submit" value="Gravar" />
 	</form>

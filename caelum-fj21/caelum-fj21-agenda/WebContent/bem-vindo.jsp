@@ -13,5 +13,13 @@
 	<br />
 	
 	<% System.out.println("Tudo foi executado!"); %>
+	
+	<br /><br />
+	
+	<a href="mvc?logica=ListaContatosLogic">Lista de contatos</a>
+	
+	<br />
+	
+	<a href="mvc?logica=FormSalvaContatoLogic">Adicionar um contato</a>
 </body>
 </html>

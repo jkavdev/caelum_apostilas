@@ -15,10 +15,11 @@ public class SalvaContatoLogic implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		long id = 0;
+		Long id = null;
 
-		if (req.getParameterMap().containsKey("id") && !req.getParameter("id").isEmpty())
+		if (req.getParameterMap().containsKey("id") && !req.getParameter("id").isEmpty()) {
 			id = Long.parseLong(req.getParameter("id"));
+		}
 
 		String nome = req.getParameter("nome");
 		String endereco = req.getParameter("endereco");
@@ -42,10 +43,11 @@ public class SalvaContatoLogic implements Logica {
 		contato.setDataNascimento(dataNascimento);
 
 		ContatoDao dao = new ContatoDao();
-		if (contato.getId() == 0)
+		if (contato.getId() == null || contato.getId() == 0) {
 			dao.adiciona(contato);
-		else
+		} else {
 			dao.altera(contato);
+		}
 
 		return "mvc?logica=ListaContatosLogic";
 	}
