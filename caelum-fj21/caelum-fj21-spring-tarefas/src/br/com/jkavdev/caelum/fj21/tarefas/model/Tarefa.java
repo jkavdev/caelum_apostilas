@@ -2,6 +2,10 @@ package br.com.jkavdev.caelum.fj21.tarefas.model;
 
 import java.util.Calendar;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Tarefa {
 
 	private Long id;
@@ -17,6 +21,8 @@ public class Tarefa {
 		this.id = id;
 	}
 
+	@NotBlank
+	@Size(min = 5)
 	public String getDescricao() {
 		return descricao;
 	}
