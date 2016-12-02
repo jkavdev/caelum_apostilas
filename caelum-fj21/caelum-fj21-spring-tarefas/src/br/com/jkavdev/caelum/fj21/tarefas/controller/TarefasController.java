@@ -42,4 +42,28 @@ public class TarefasController {
 		return "tarefa/lista";
 	}
 
+	@RequestMapping("removeTarefa")
+	public String lista(Tarefa tarefa) {
+		TarefasDao tarefasDao = new TarefasDao();
+		tarefasDao.remove(tarefa);
+
+		return "redirect:listaTarefas";
+	}
+
+	@RequestMapping("mostraTarefa")
+	public String mostra(Long id, Model model) {
+		TarefasDao tarefasDao = new TarefasDao();
+		model.addAttribute("tarefa", tarefasDao.pesquisar(id));
+
+		return "tarefa/mostra";
+	}
+
+	@RequestMapping("alteraTarefa")
+	public String altera(Tarefa tarefa) {
+		TarefasDao tarefasDao = new TarefasDao();
+		tarefasDao.altera(tarefa);
+
+		return "redirect:listaTarefas";
+	}
+
 }

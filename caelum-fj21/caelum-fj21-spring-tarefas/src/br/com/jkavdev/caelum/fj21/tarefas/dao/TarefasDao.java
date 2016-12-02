@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -61,6 +62,64 @@ public class TarefasDao {
 			return tarefas;
 		} catch (Exception e) {
 			throw new DaoException(e);
+		}
+	}
+
+	public void remove(Tarefa tarefa) {
+		try {
+			PreparedStatement stmt = connection.prepareStatement("delete from Tarefas where id=?");
+			stmt.setLong(1, tarefa.getId());
+
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public Tarefa pesquisar(Long id) {
+		Tarefa tarefa = new Tarefa();
+		String selectPorId = "select * from Tarefas where id = ?";
+
+		try {
+			PreparedStatement preparedStatement = this.connection.prepareStatement(selectPorId);
+			preparedStatement.setLong(1, id);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				tarefa.setId(resultSet.getLong("id"));
+				tarefa.setDescricao(resultSet.getString("descricao"));
+				tarefa.setFinalizado(resultSet.getBoolean("finalizado"));
+
+				Calendar data = Calendar.getInstance();
+				data.setTime(resultSet.getDate("dataFinalizacao"));
+				tarefa.setDataFinalizacao(data);
+			}
+
+			resultSet.close();
+			preparedStatement.close();
+
+			return tarefa;
+		} catch (Exception e) {
+			throw new DaoException(e);
+		}
+	}
+
+	public void altera(Tarefa tarefa) {
+		String alteraContato = "update Tarefas set descricao=?, finalizado=?, dataFinalizacao=? where id=?";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(alteraContato);
+			stmt.setString(1, tarefa.getDescricao());
+			stmt.setBoolean(2, tarefa.isFinalizado());
+			stmt.setDate(3, new Date(tarefa.getDataFinalizacao().getTimeInMillis()));
+			
+			stmt.setLong(4, tarefa.getId());
+
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

@@ -25,6 +25,9 @@
 					<td>Finalizado</td>
 				</c:if>
 				<td><fmt:formatDate value="${tarefa.dataFinalizacao.time}" pattern="dd/MM/yyyy" /></td>
+				
+				<td><a href="removeTarefa?id=${tarefa.id}">Remover</a></td>
+				<td><a href="mostraTarefa?id=${tarefa.id}">Alterar</a></td>
 			</tr>
 		</c:forEach>
 	</table>
