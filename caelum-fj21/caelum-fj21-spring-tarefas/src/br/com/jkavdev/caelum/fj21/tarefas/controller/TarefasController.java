@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.jkavdev.caelum.fj21.tarefas.dao.TarefasDao;
 import br.com.jkavdev.caelum.fj21.tarefas.model.Tarefa;
@@ -58,7 +59,7 @@ public class TarefasController {
 		return "tarefa/mostra";
 	}
 
-	@RequestMapping("alteraTarefa")
+	@RequestMapping(value = "alteraTarefa", method = RequestMethod.POST)
 	public String altera(Tarefa tarefa) {
 		TarefasDao tarefasDao = new TarefasDao();
 		tarefasDao.altera(tarefa);
