@@ -2,6 +2,7 @@ package br.com.jkavdev.caelum.fj21.tarefas.controller;
 
 import java.util.Calendar;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -65,6 +66,14 @@ public class TarefasController {
 		tarefasDao.altera(tarefa);
 
 		return "redirect:listaTarefas";
+	}
+
+	@RequestMapping(value = "finalizaTarefa", method = RequestMethod.POST)
+	public void finaliza(Long id, HttpServletResponse response) {
+		TarefasDao tarefasDao = new TarefasDao();
+		tarefasDao.finaliza(id);
+
+		response.setStatus(200);
 	}
 
 }

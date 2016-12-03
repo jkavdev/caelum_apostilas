@@ -123,4 +123,20 @@ public class TarefasDao {
 		}
 	}
 
+	public void finaliza(Long id) {
+		String finalizaTarefa = "update Tarefas set finalizado=? where id=?";
+		boolean tarefaFinalizada = true;
+		try {
+			PreparedStatement stmt = connection.prepareStatement(finalizaTarefa);			
+			stmt.setBoolean(1, tarefaFinalizada);
+			
+			stmt.setLong(2, id);
+
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }
